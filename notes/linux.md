@@ -111,6 +111,14 @@ ln -snf [新的源文件或目录] [目标文件或目录]
 ```shell
 watch -n1 nvidia-smi
 ```
+##### 9、scp
+
+用于可以在两台主机间传输文件，速度要比使用xftp快非常多。
+
+```
+scp -P 10110 -r '/home/mr/data/whispers/test_unzip' root@xx.xxx.xxx.xx:/home/mr/data/whispers/test 
+```
+
 
 
 
