@@ -199,8 +199,31 @@ userdel -r xkchai
 sudo passwd xkchai
 ```
 
-##### 15、systemctl
+##### 15、systemctl和service
 
-systemctl是一个systemd工具，主要控制负责systemd系统和服务管理器。systemd是一个系统管理守护进程、工具和库的集合，用于取代System V初始进程。systemd的功能是用于集中管理和配置类UNIX系统。
+[参考](https://www.cnblogs.com/shijingjing07/p/9301590.html)
 
-[参考](https://linux.cn/article-5926-1.html)
+linux的服务管理有两种方式service和systemctl。
+
+service命令去/etc/init.d目录下执行相关程序。例如启动ssh的服务器端程序
+
+```shell
+/etc/init.d/ssh start
+# 等价
+service ssh start
+```
+
+对于`systemctl`，我们先介绍`systemd`。`systemd`是Linux系统最新初始化系统(init)，作用是提高系统的启动速度，尽可能启动较少的进程，尽可能多进程并发启动。
+
+而`systemd`对应的进程管理命令是`systemctl`。
+
+`systemctl`兼容了`service`，也就是systemctl也会去/etc/init.d目录下，查看执行相关程序。
+
+```shell
+systemctl ssh start
+systemctl ssh stop
+```
+
+systemctl命令管理systemd的资源Unit。
+
+##### 

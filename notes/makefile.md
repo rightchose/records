@@ -195,7 +195,83 @@ include foo.make a.mk b.mk c.mk e.mk f.mk
 
 ##### 4.1、引入makefile后的make工作方式
 
+//TODO
 
+##### 5、在规则中使用通配符
+
+make支持三个通配符`*`，`?`，`~`。
+
+
+
+##### 6、makefile的关键字
+
+`wildcard`，`patsubst`
+
+##### 7、文件搜寻
+
+makefile文件中的特殊变量`VPATH`，如果没有指明该变量，make只会在当前目录搜寻依赖文件和目标文件。定义了该变量，make则会在当前目录找不到的情况下到指定目录中去寻找文件。
+
+```makefile
+VPATH = src:../headers
+```
+
+上面的定义指定两个目录，“src”和“../headers”，make会按照这个顺序进行搜索。目录由“冒号”分隔。（当然，当前目录永远是最高优先搜索的地方）
+
+
+
+
+
+##### 5、变量进阶
+
+makefile中的变量定义，可以不按照顺序。因此可以有下面的形式,
+
+```makefile
+foo = $(bar)
+bar = $(ugh)
+ugh = Huh?
+```
+
+这样做的可以允许我们将变量的真实值推到后面来定义。
+
+```makefile
+CFLAGS = $(include_dirs) -O
+include_dirs = -Ifoo -Ibar
+```
+
+`include_dirs`会被展开`-Ifoo -Ibar -O`。
+
+但这样也会造成递归定义问题。
+
+```makefile
+A = $(B)
+B = $(A)
+```
+
+但make是有能力检查出这个问题。另外就是在变量种使用函数，这种方式会让我们的make运行时非常慢，更糟糕的是，他会使用得两个make的函数“wildcard”和“shell”发生不可预知的错误。因为你不会知道这两个函数会被调用多少次。
+
+为了避免上面的这种方法，我们可以使用make中的另一种用变量来定义变量的方法 `:=` 操作符：
+
+```makefile
+x := foo
+y := $(x) bar
+x := later
+```
+
+等价于
+
+```makefile
+y := foo bar
+x := later
+```
+
+值得一提的是，这种方法，前面的变量不能使用后面的变量，只能使用前面已定义好了的变量。如果是这样：
+
+```makefile
+y := $(x) bar
+x := foo
+```
+
+那么，y的值是“bar”，而不是“foo bar”。
 
 
 
