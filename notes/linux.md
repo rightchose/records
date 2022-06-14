@@ -226,4 +226,92 @@ systemctl ssh stop
 
 systemctl命令管理systemd的资源Unit。
 
-##### 
+##### 16、tmux使用
+
+类似于先前的`screen`，[参考](https://www.ruanyifeng.com/blog/2019/10/tmux.html)
+
+**安装**
+
+```sh
+# Ubuntu or Debian
+apt-get install tmux
+# Centos
+yum install tmux
+```
+
+**创建会话**
+
+```sh
+tmux
+```
+
+上面的方式会默认创建一个编号为0的会话，如果已有该会话，则编号顺序递延。但是编号缺乏足够信息，不便于管理，我们最好为会话绑定一个名称。
+
+```shell
+tmux new -s <session-name>
+```
+
+**关闭会话**
+
+```sh
+exit
+```
+
+也可以`ctrl`+`d`。会话内进程也会终止。
+
+**离开会话**
+
+```shell
+tmux detach
+```
+
+也可以`ctrl`+`b`+`d`。会话内进程依旧存在。
+
+**重入会话**
+
+```shell
+tmux attach -t <session-id>
+tumx attach -t <session-name>
+```
+
+**会话管理**
+
+```shell
+# 查看所有会话
+tmux ls
+# or
+tmux list-session
+# 杀死会话
+tmux kill-session -t <session-id>
+tmux kill-session -t <session-name>
+# 会话切换
+tmux switch -t <session-id>
+tmux switch -t <session-name>
+# 会话重命名
+tmux rename-session-t <session-id> <new-name>
+```
+
+**窗口划分**
+
+```shell
+# 划分上下两个窗格
+tmux split-window
+# 划分左右两个窗格
+tmux split-window -h
+```
+
+窗口划分后，我们需要移动光标位置。
+
+```
+# 光标切换到上方窗格
+tmux select-pane -U
+# 下方
+tmux select-pane -D
+# 左边窗格
+tmux select-pane -L
+# 右边窗格
+tmux select-pane -R
+```
+
+
+
