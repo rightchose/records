@@ -17,7 +17,7 @@
 
 1  → 2：前端将不同模型转换成Graph IR。在TVM为Relay。这一步完成后，深度学习框架相关的东西消失了。
 
-2 &rarr; 3：中端，relay lowers to Tensor Expression(TE)。lowering 也就是from higher-level representation to  lower-level representation。这一步也就将先前的model graph IR 分割成许多的subgraphs，然后再转换成Tensor Expression（TE）。TE是一种domain-specific language，用于描述计算的。TE also provides several *schedule* primitives to specify low-level loop optimizations, such as tiling, vectorization, parallelization, unrolling, and fusion. 
+2 &rarr; 3：中端，relay lowers to Tensor Expression(TE)。lowering 也就是from higher-level representation to  lower-level representation。这一步也就将先前的model graph IR 分割成许多的subgraphs，然后再转换成Tensor Expression（TE）。TE是一种domain-specific language，用于描述计算的。TE also provides several *schedule* primitives to specify low-level loop optimizations, such as tiling, vectorization, parallelization, unrolling, and fusion. 对于这几个名词具体含义不理解可以看下[这个](https://oldpan.me/archives/learn-a-little-halide)。
 
 3 &rarr;4：中端，使用auto-tuning module寻找最好的schedule。TVM中目前有的AutoTVM或AutoScheduler。
 
