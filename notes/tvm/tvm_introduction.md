@@ -1,5 +1,6 @@
-##### TVM
-[ref](https://tvm.apache.org/docs/tutorial/introduction.html)
+##### TVM Introduction
+[参考](https://tvm.apache.org/docs/tutorial/introduction.html)
+
 现代编译器可以抽象出前端，中端，后端。前端负责将不同语言进行代码生成，产生Intermediate Representation。中端，接受IR，进行不同编译器后端可以共享的优化，如常量替换，死代码消除，循环优化，吐出优化后的IR。后端，接受优化后的IR，进行不同硬件平台相关的指令生成，得到目标文件。
 
 个人理解的这三个阶段划分，前端和后端是类似翻译的作用，前端将不同语言转成同一种描述，后端将该种描述转到不同硬件平台。中端对描述进行了优化。
@@ -27,7 +28,7 @@
 6&rarr;7：后端，优化的TIR会被翻译到目标得硬件平台。TVM支持的后端有LLVM，NVCC等。
 
 
-
+### Extra
 ##### scheduler
 
 TVM可以将深度学习模型中的计算（本质计算图）转化为Graph IR(Relay)，然后通过TVM提供的指令生成模块将Graph IR翻译成特定硬件可执行的指令或者代码。总的来说的TVM的思想可以总结为表示和调度分离，所谓表示就是IR，调度就是scheduler。同时，在高性能计算方面TVM提供了多种调度源语（**scheduler**），包含了大多数常见的优化手段如算子融合，读写缓存，分块计算，并行计算等等，这些计算方法都可以通过scheduler进行实现。
