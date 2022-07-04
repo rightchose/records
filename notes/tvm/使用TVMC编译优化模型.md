@@ -1,17 +1,22 @@
-[参考](https://tvm.apache.org/docs/tutorial/tvmc_command_line_driver.html)
+[原文](https://tvm.apache.org/docs/tutorial/tvmc_command_line_driver.html)
 
-首先介绍TVMC，the TVM command line driver。TVMC能够使用TVM的auto-tuning，compiling，profiling 和 execution of model的特性，以命令行的接口。
+**TVMC**
 
-介绍一下本节内容，
+全称 TVM command line driver，TVM命令行驱动。TVMC可以看做是一个工具，通过它，我们可以以命令行的形式使用TVM的auto-tuning、compiling、profiling以及execute model的一些features。
 
-- 编译一个在TVM runtime上的预训练的ResNet-50 v2 model。
+下面的内容以下面的方式组织
 
-- 使用真实图片送入编译的模型，解释模型输出和性能。
+1、编译一个预训练好的ResNet-50 v2模型（for TVM runtime ？只需要TVM runtime支持？）。
 
-- 在CPU上使用TVM tune model。
+2、使用真是图片去测试编译的模型，并解释输出，测量模型性能。
 
-- 使用TVM收集的tuning data 去 re-compile and optimized model。
+3、使用TVM优化model在CPU上的运行。
 
-- 运行优化的模型，对比模型输出和性能
+4、基于TVM收集到的tuning data重新去编译模型。
 
-  
+5、重新执行第二个环节。
+
+### 预备
+
+TVMC是一个python application， part of TVM python package。安装完tvm的python packge后，可以使用tvmc命令。s
+
