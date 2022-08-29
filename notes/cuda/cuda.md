@@ -34,7 +34,28 @@ The NVIDIA GPU architecture uses a little-endian representation.（采用小端�
 
 
 
+```
 
+#define CUDA_CALL(f)                                                           \
+  {                                                                            \
+    cudaError_t err = (f);                                                     \
+    if (err != cudaSuccess) {                                                  \
+      std::cout << "    CUDA Error occurred: " << err << std::endl;            \
+      std::cout << "    at line " << __LINE__ << std::endl;                    \
+      std::exit(1);                                                            \
+    }                                                                          \
+  }
+
+#define CUDNN_CALL(exp)                                                        \
+  {                                                                            \
+    cudnnStatus_t status = (exp);                                              \
+    if (status != CUDNN_STATUS_SUCCESS) {                                      \
+      std::cout << "Error on line " << __LINE__ << ": "                        \
+                << cudnnGetErrorString(status) << std::endl;                   \
+      std::exit(EXIT_FAILURE);                                                 \
+    }                                                                          \
+  }
+```
 
 
 
