@@ -22,8 +22,6 @@ CUDA官方文档分为若干部分，按顺序依次为introduction、cuda编程
 
 另外还有一些附录内容，介绍CUDA支持的设备、C++语言扩展、不同cuda thread 的groups间的同步原语、CUDA同步编程、虚拟内存管理、Stream Ordered内存分配释放、Graph Memory Node、数学函数、C++语言支持、Texture Fetching、Compute Capabilities、Driver API、CUDA Environment Variables、Unified Memory Programming。
 
-
-
 ##### hardware Implementation
 
 Nvidia GPU是由弹性的 multi threaded Streaming multiprocessor（SMs)构成。一个multirprocessor可以同时执行上百个threads。为了管理这些threads，GPU有一个SIMT(Single-Instruction Multiple-Thread)的架构。指令是流水线的，可以在单thread上进行instruction-level的并行，也可以扩展为thread-level parallelism（多个multi threading )。不同于CPU core，他们 issued in oreder and 没有分支预测或者 speculative execution。这里想到了当初高级计算机体系结构课程。。。。emmm发现课程还是得好好学。
@@ -32,10 +30,7 @@ The NVIDIA GPU architecture uses a little-endian representation.（采用小端�
 
 #### SIMT Architecture
 
-
-
 ```
-
 #define CUDA_CALL(f)                                                           \
   {                                                                            \
     cudaError_t err = (f);                                                     \
@@ -56,24 +51,3 @@ The NVIDIA GPU architecture uses a little-endian representation.（采用小端�
     }                                                                          \
   }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
