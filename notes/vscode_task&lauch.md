@@ -199,3 +199,95 @@ vscode中默认的一些tasks设置也许不满足你的要求。可以去修改
 这里可以去看下官方的[文档](https://code.visualstudio.com/docs/editor/variables-reference)
 
 2、有关vscode插件开发可以参考[这里](https://code.visualstudio.com/api)
+
+
+#### 常用的一段代码
+```
+'''
+    单步调试时，发现对于有命令行的单步调试非常麻烦
+    每次都要单独去编写相应的launch.json
+    注意一点，vscode中的json解析貌似时支持额外的,符号，但是python的json是不支持的
+    要求解析的bash的格式为：
+    CUDA_VISIBLE_DEVICES=2 \
+    python tools/eval.py \
+    --cfg_path /home/mr/code/Tracking/experiment/siam_alexnet_drop/config.yaml \
+    --data_dir /home/mr/data/whispers/train/ \
+    --model_path /home/mr/code/Tracking/experiment/siam_alexnet_drop/2021-6-22-16-55-HSI/models/checkpoint_e30_train_loss_0.0777_valid_loss_1.1112.pth \
+    --model_name siamAlexNetDrop \
+    --tracker_name siamfc \
+    --res_dir /home/mr/code/Tracking/experiment/siam_alexnet_drop/2021-6-22-16-55-HSI \
+    --mode HSI \
+    --valid_videos \
+    --videos_path val.txt
+'''
+import json
+from pathlib import Path
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--bash_path', help="the path of bash to add launch.json")
+args = parser.parse_args()
+
+launch_path = Path('./.vscode/launch.json')
+with launch_path.open('r') as f:
+    load_dict = json.load(f)
+
+def isNull(x):
+    if x == '':
+        return False
+    return True
+
+def iscomment(x):
+    if x[0] == '#': # comment
+        return False
+    return True
+
+def removeEnd(x):
+    if x == '\\': # is useless info
+        return False
+    return True
+
+# 要写成launch.json的脚本路径
+bash_path = Path(args.bash_path)
+lines = bash_path.open('r').readlines()
+lines = list(filter(iscomment, lines)) # 过滤掉注释
+lines = [line.strip().split(' ') for line in lines]
+lines = sum(lines, []) # 展开
+lines = list(filter(removeEnd, lines))
+lines = list(filter(isNull, lines))
+'''
+    要写入launch.json的配置
+'''
+add = {}
+add["name"] = bash_path.stem
+# add["type"] = lines[0] + " " + lines[1]
+# CUDA_VISIBLE_DEVICES=2 这个命令该如何在launch.json中实现？
+add["type"] = lines[1] 
+add['request'] = "launch"
+add["program"] = '${workspaceFolder}/' + lines[2]
+add["args"] = []
+for i in lines[3:]:
+    add["args"].append(i)
+
+add["env"] = {}
+key, value = lines[0].split("=")
+add["env"][key] = value
+# 检查config中原有的相同脚本是否有同名
+for idx, config in enumerate(load_dict["configurations"]):
+    if config["name"] == bash_path.stem:
+        choice = input("there exists the config with same name. please input y to replace or n to cancel:")
+        if choice.lower() == 'y':
+            del load_dict["configurations"][idx]
+            print("delete the existed configuration {}".format(bash_path.stem))
+        else:
+            print("don't change the existed configuration {}".format(bash_path.stem))
+        break
+
+
+# 写入launch.json
+load_dict["configurations"].append(add)
+# 格式化一下输出
+prettyPrintedJson  = json.dumps(load_dict, indent=4, separators=(",", " : "))
+f = launch_path.open('w')
+f.write(prettyPrintedJson)
+```

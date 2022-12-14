@@ -33,7 +33,7 @@
 
 一个稍微复杂的table。
 ```
-\begin{center}[htbp]
+\begin{table}[htbp]
     \centering
     \caption{\label{tab:sensor}传感器介绍}
     
@@ -46,5 +46,14 @@
         超声波雷达 & 处理速度快 & 方向性差 & 近距离目标检测 \\
         红外线 & 精度高 & 分辨率低，距离短 & 夜视、红外成像 \\ \hline
     \end{tabularx}
-\end{center}
+\end{table}
+```
+
+###### 表格的行距调整
+
+```
+\begingroup
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\endgroup
 ```
