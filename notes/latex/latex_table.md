@@ -36,7 +36,7 @@
 \begin{center}[htbp]
     \centering
     \caption{\label{tab:sensor}传感器介绍}
-    % \begin{tabularx}{\linewidth}{ p{.15\linewidth}<{\centering} | p{.25\linewidth}<{\centering} | p{.25\linewidth}<{\centering} | p{.25\linewidth}<{\centering}}
+    
     \begin{tabularx}{\linewidth}{ p{.15\linewidth}<{\centering}  p{.25\linewidth}<{\centering}  p{.25\linewidth}<{\centering}  p{.25\linewidth}<{\centering}} 
         \hline
         传感器种类 & 优点 & 缺点 & 主要用途 \\ \hline
