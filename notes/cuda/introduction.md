@@ -388,7 +388,6 @@ int grid_size = (N-1) / grid_size + 1;
 const int n = blockIdx.x * blockDim.x + threadIdx.x;
 if(n >= N) return;
 z[n] = x[n] + y[n];
-
 ```
 
 ##### 自定义设备函数
@@ -412,7 +411,6 @@ z[n] = x[n] + y[n];
 ##### 例子：为数组相加的核函数定义一个设备函数
 
 ```cpp
-
 // 版本1，有返回值的设备函数
 double __device__ add1_device(const double x, const double y)
 {
@@ -459,8 +457,6 @@ void __global__ add3(const double *x, const double *y, double *z, int N)
     }
 }
 ```
-
-
 
 ## cuda 程序的错误检测
 
@@ -535,7 +531,6 @@ cuda-memcheck ./a.out
 CUDA提供了一种基于CUDA事件的计时方式，可以给一段CUDA代码（可能包含主机代码和设备代码）计时。例子如下
 
 ```cpp
-
 cudaEvent_t start, stop;
 CHECK(cudaEventCreate(&start));
 CHECK(cudaEventCreate(&stop));
