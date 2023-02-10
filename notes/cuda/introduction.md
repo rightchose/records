@@ -55,8 +55,6 @@ sudo nvidia-smi -i GPU_ID -c 1 # 独占进程模式
 
 - CUDA API有两种，runtime API和driver API，runtime API在driver API基础上构建，更抽象。二者性能并无太大差异。
 
-
-
 ##### nvcc编译CUDA程序
 
 CUDA的编译器驱动nvcc先将源代码分离为主机代码和设备代码。主机代码完整地支持C++语法。而设备代码只部分支持C++。nvcc先将设备代码编译成PTX（parallel thread exection）伪汇编代码，再将PTX代码编译为二进制cubin目标代码。再将源代码编译为PTX代码时，需要用选项`-arch=compute_XY`指定一个虚拟架构的计算能力，用以确定代码能够使用的计算能力。将PTX编译cubin代码时，需要指定`-code=sm_ZW`指定一个真实的架构的计算能力。
@@ -68,6 +66,8 @@ CUDA的编译器驱动nvcc先将源代码分离为主机代码和设备代码。
 # 简化
 -arch=sm_XY
 ```
+
+![](../../assert/NVCC.png)
 
 ##### nvcc即时编译
 
