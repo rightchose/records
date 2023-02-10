@@ -23,7 +23,7 @@
 
 **CUDA编程语言**
 
-CUDA编程语言最初主要是基于C语言，但目前越来越多地支持C++语言。CUDA提供了脸更API，即CUDA driver api 和 CUDA runtime api。其中，CUDA runtime API是在driver api上构建的更高级的api。两者在性能上几乎没有差别。
+CUDA编程语言最初主要是基于C语言，但目前越来越多地支持C++语言。CUDA提供了两种API，即CUDA driver api 和 CUDA runtime api。其中，CUDA runtime API是在driver api上构建的更高级的api。两者在性能上几乎没有差别。
 
 **CUDA版本**
 
