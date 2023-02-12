@@ -129,6 +129,7 @@ ln -snf [新的源文件或目录] [目标文件或目录]
 ```shell
 watch -n1 nvidia-smi
 ```
+
 ##### 9、scp
 
 用于可以在两台主机间传输文件，速度要比使用xftp快非常多。
@@ -312,6 +313,3 @@ tmux select-pane -L
 # 右边窗格
 tmux select-pane -R
 ```
-
-
-

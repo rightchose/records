@@ -6,8 +6,8 @@
 
 ```sh
 target ...: prerequisites ...
-	command
-	...
+    command
+    ...
 ```
 
 target：可以是一个object file(目标文件)，也可以是一个执行文件，还可以是一个标签（label）。标签有着特殊的性质。
@@ -17,7 +17,7 @@ prerequisites：生成该target所依赖的文件 和/或 target。也就是当�
 command：生成该target要执行的命令。
 
 > prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。
->
+> 
 > 这就是makefile的规则，也就是makefile中最核心的内容。
 
 一个样例
@@ -64,12 +64,10 @@ clean :
 - 如果 `edit` 所依赖的 `.o` 文件也不存在，那么make会在当前文件中找目标为 `.o` 文件的依赖性，如果找到则再根据那一个规则生成 `.o` 文件。（这有点像一个堆栈的过程）
 
 - 当然，你的C文件和H文件是存在的啦，于是make会生成 `.o` 文件，然后再用 `.o` 文件生成make的终极任务，也就是执行文件 `edit` 了。
-
-  所以，make是依据edit的依赖一层层地去寻找需要执行的命令，类似于树。因此上面的例子中`clean`后面的命令不会被执行，因为edit并不依赖于它。不过我们可以通过执行`make clean`显式地清楚目标文件和中间文件，再执行`make`来重新编译。
-
-  基本上到了这里，我们已经可以处理绝大多数场景了。
-
   
+  所以，make是依据edit的依赖一层层地去寻找需要执行的命令，类似于树。因此上面的例子中`clean`后面的命令不会被执行，因为edit并不依赖于它。不过我们可以通过执行`make clean`显式地清楚目标文件和中间文件，再执行`make`来重新编译。
+  
+  基本上到了这里，我们已经可以处理绝大多数场景了。
 
 #### 进阶
 
@@ -153,7 +151,7 @@ clean :
 
 ```makefile
 clean:
-	rm edit $(objects)
+    rm edit $(objects)
 ```
 
 更好的做法使用`.PHONY`，表示`clean`是一个伪目标，也就是false target。所以后面有关`clean`的规则项并没有上面的prerequisites。这里我们在`rm`前加上了`-`号，表示，也许某些文件出现问题，但不要管，继续做后面的事。另外，`clean`的规则不要放到文件开头，否则，make的默认目标就是`clean`，显然我们不想如此。因此，一般我们将`clean`放到makefile的最后。
@@ -161,7 +159,7 @@ clean:
 ```makefile
 .PHONY: clean
 clean:
-	-rm edit $(objects)
+    -rm edit $(objects)
 ```
 
 ##### 4、引用其他makefile
@@ -201,8 +199,6 @@ include foo.make a.mk b.mk c.mk e.mk f.mk
 
 make支持三个通配符`*`，`?`，`~`。
 
-
-
 ##### 6、makefile的关键字
 
 `wildcard`，`patsubst`
@@ -216,10 +212,6 @@ VPATH = src:../headers
 ```
 
 上面的定义指定两个目录，“src”和“../headers”，make会按照这个顺序进行搜索。目录由“冒号”分隔。（当然，当前目录永远是最高优先搜索的地方）
-
-
-
-
 
 ##### 5、变量进阶
 
@@ -273,8 +265,6 @@ x := foo
 
 那么，y的值是“bar”，而不是“foo bar”。
 
-
-
 ##### 4、makefile里有什么
 
 makefile里主要包含五个东西：显式规则、隐晦规则、变量定义、文件指示和注释。
@@ -287,17 +277,6 @@ makefile里主要包含五个东西：显式规则、隐晦规则、变量定义
 
 ##### 5、在规则中使用通配符
 
-
-
-
-
-
-
-
-
 ##### 4、另类风格的makefile
 
-
-
 ##### 2、.PHONY
-
