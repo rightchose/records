@@ -6,8 +6,6 @@ cmake一些内置变量
 
 `CMAKE_ROOT`：cmake安装的目录
 
-
-
 cmake一些语法记录：
 
 ```cmake
@@ -16,6 +14,18 @@ cmake_minimum_required(VERSION X.X)
 
 # 项目信息
 project(Demo1)
+
+# 为项目配置CTest/CDash
+# 在顶级CMakeLists.txt中配置，导入后，会自动创建一个BUILD_TESTING  option
+# 后续可判断是否使用测试
+include(CTest)
+if(BUILD_TESTING)
+    # CMake Code to create tests ...
+endif()
+# 至于CDash，to enable submission to a CDash Server, create a CTestonfig.cmake
+# example
+set(CTEST_NIGHTLY_START_TIME "01:00:00 UTC")
+set(CTEST_SUBMIT_URL "http://my.cdash.org/submit.php?project=MyProject")
 
 # 指定生成目标，将main.cc编译成一个名称为Demo的可执行文件
 add_executable(Demo main.cc)
