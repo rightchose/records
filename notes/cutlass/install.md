@@ -29,3 +29,6 @@ nvcc  -Ipath_to_/cutlass/include -Ipath_to_/cutlass/examples/common -Ipath_to/bu
 You can try below command to see an example
 
 make 08_turing_tensorop_gemm VERBOSE=1
+
+## cmake编译cutlass项目
+TODO
