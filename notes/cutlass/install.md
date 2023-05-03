@@ -14,9 +14,9 @@ CUTLASS requires:
 ```bash
 docker pull nvidia/cuda:12.1.0-base-ubuntu18.04
 
-
-
-docker run --runtime nvidia -p 10114:22 -v /raid/mr:/home/mr --name mr-test -ti nvidia/cuda:12.1.0-base-ubuntu18.04
+docker run --runtime nvidia -p 10114:22 -v /raid/mr:/home/mr --name mr-test -ti nvidia/cuda:12.1.0-base-ubuntu18.04   /bin/bash
 ```
+
+或者直接手动构建
 
 
