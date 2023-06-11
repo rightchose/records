@@ -59,8 +59,8 @@ make -j16
 每次机器重启，运行的容器都要重新启动下。
 ```
 sudo docker ps -a
+sudo docker start 83c5307ecb57
 sudo docker exec -ti 83c5307ecb57 /bin/bash 
-# container
 /usr/sbin/sshd -p 8801
 ```
 
