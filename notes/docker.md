@@ -1,4 +1,4 @@
-### 基本概念
+### 1、基本概念
 
 #### 镜像(Image)
 
@@ -23,3 +23,11 @@ Docker镜像是一个特殊的文件系统，除了提供容器运行时所需�
 Docker Registry 公开服务是开放给用户使用、允许用户管理镜像的 Registry 服务。一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像。
 
 除了使用公开服务外，用户还可以在本地搭建私有 Docker Registry。Docker 官方提供了 Docker Registry 镜像，可以直接使用做为私有 Registry 服务。
+
+
+### 2、上手
+#### 构建镜像
+
+```bash
+docker build -t xxx:xxx . # Dockerfile文件同级目录下执行
+```
