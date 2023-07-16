@@ -17,7 +17,7 @@
 # 拉取镜像
 docker pull registry.cn-hangzhou.aliyuncs.com/hellofss/kuiperinfer:latest
 # 启动容器
-sudo docker run --name mr-1 --network host --cpus=6 -ti registry.cn-hangzhou.aliyuncs.com/hellofss/kuiperinfer:latest /bin/bash
+sudo docker run --name vimrc-learn --network host --cpus=6 -ti registry.cn-hangzhou.aliyuncs.com/hellofss/kuiperinfer:latest /bin/bash
 ```
 
 配置免密登录
