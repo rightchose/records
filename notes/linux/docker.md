@@ -24,10 +24,40 @@ Docker Registry 公开服务是开放给用户使用、允许用户管理镜像�
 
 除了使用公开服务外，用户还可以在本地搭建私有 Docker Registry。Docker 官方提供了 Docker Registry 镜像，可以直接使用做为私有 Registry 服务。
 
+### 2、Docker安装
+- Ubuntu
+[参考](https://docs.docker.com/engine/install/ubuntu/)
 
-### 2、上手
-#### 构建镜像
+- 配置gpu环境
+
+Docker19之后只用安装nvidia-container-runtime即可。
+[参考](https://www.jianshu.com/p/84357d5a116a)
+```
+# https://nvidia.github.io/nvidia-container-runtime/
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
+  sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
+  sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+sudo apt-get update
+# 安装
+sudo apt-get install nvidia-container-runtime
+# 重启docker
+sudo systemctl restart docker
+```
+
+### 3、上手
+- 拉取并启动容器
 
 ```bash
-docker build -t xxx:xxx . # Dockerfile文件同级目录下执行
+sudo docker pull nvidia/cuda:11.7.1-devel-ubuntu22.04
+
+# 安装
+
+sudo docker run --name nv-cuda --network host --cpus=4 --gpus all -ti 73697d15aedc /bin/bash
+
 ```
+
+- 构建自己的镜像
+
+编写DockFile
