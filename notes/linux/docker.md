@@ -50,11 +50,10 @@ sudo systemctl restart docker
 - 拉取并启动容器
 
 ```bash
-sudo docker pull nvidia/cuda:11.7.1-devel-ubuntu22.04
+docker pull nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
 
-# 安装
 
-sudo docker run --name nv-cuda --network host --cpus=4 --gpus all -ti 73697d15aedc /bin/bash
+sudo docker run --name cutlass_learn_test -v /home/mengran:/home/mengran  --network host --cpus=4 --gpus all -ti nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 /bin/bash
 
 ```
 
